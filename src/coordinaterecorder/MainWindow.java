@@ -38,8 +38,8 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        anchorX = new javax.swing.JTextField();
+        anchorY = new javax.swing.JTextField();
         addAnchorButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -79,16 +79,21 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
 
-        jTextField2.setText("y");
-        jPanel6.add(jTextField2);
-
-        jTextField1.setText("x");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        anchorX.setText("y");
+        anchorX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                anchorXActionPerformed(evt);
             }
         });
-        jPanel6.add(jTextField1);
+        jPanel6.add(anchorX);
+
+        anchorY.setText("x");
+        anchorY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anchorYActionPerformed(evt);
+            }
+        });
+        jPanel6.add(anchorY);
 
         addAnchorButton.setText("Anchor A");
         addAnchorButton.addActionListener(new java.awt.event.ActionListener() {
@@ -235,12 +240,17 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_markButtonActionPerformed
 
     private void addAnchorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAnchorButtonActionPerformed
-        // TODO add your handling code here:
+        recorder.setAnchor(Double.parseDouble(anchorX.getText()), Double.parseDouble(anchorY.getText()));
+        
     }//GEN-LAST:event_addAnchorButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void anchorYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anchorYActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_anchorYActionPerformed
+
+    private void anchorXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anchorXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_anchorXActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,6 +289,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAnchorButton;
+    private javax.swing.JTextField anchorX;
+    private javax.swing.JTextField anchorY;
     private javax.swing.JLabel distanceLabel;
     private javax.swing.JButton endButton;
     private javax.swing.JLabel jLabel1;
@@ -290,8 +302,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton markButton;
     private javax.swing.JButton startButton;
     private javax.swing.JTextArea textArea;

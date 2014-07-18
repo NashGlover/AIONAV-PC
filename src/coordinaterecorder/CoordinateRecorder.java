@@ -15,7 +15,7 @@ import javax.swing.*;
  *sock
  * @author Administrator
  */
-public class CoordinateRecorder extends Thread{
+public class CoordinateRecorder extends Thread {
     
     Boolean marked = false;
     Boolean correcting = false;
@@ -24,16 +24,25 @@ public class CoordinateRecorder extends Thread{
     private double x = 0, y = 0, z = 0;
     private double firstX = 0, firstY = 0, firstZ = 0;
     private double beginX = 0, beginY = 0, beginZ = 0;
+    private double differenceX = 0, differenceY = 0, differenceZ = 0;
+    private double anchorX = 0, anchorY = 0;
     JTextArea workingText;
     public Boolean running;
     JLabel distanceLabel;
     int correctCount = 0;
+    Boolean first = true;
     
     /* NOT SAFE */
     CoordinateRecorder(JTextArea inTextArea, JLabel inDistanceLabel){
         System.out.println("In CoordinateRecorder");
         workingText = inTextArea;
         distanceLabel = inDistanceLabel;
+    }
+    
+    public void setAnchor (Double _x, Double _y) {
+        anchorX = _x;
+        anchorY = _y;
+        first = true;
     }
     
     void getSegInfo()
@@ -140,11 +149,15 @@ public class CoordinateRecorder extends Thread{
                                         y = Math.round(buffer.getDouble(40)*1000.00)/1000.00;
                                         z = Math.round(buffer.getDouble(48)*1000.00)/1000.00;
                                         
-                                        if (i==0)
+                                        if (first)
                                         {
-                                           // beginX = x;
-                                           // beginY = y;
+                                           differenceX = x - firstX;
+                                           differenceY = y - firstY;
+                                           first = false;
                                         }
+                                        
+                                        x = x - differenceX;
+                                        y = y - differenceY;
                                         
                                         currLine = String.format("Time: %d x: %.3f y: %.3f z: %.3f%n", timestamp, x, y, z);
                                         System.out.println(currLine);
@@ -195,5 +208,9 @@ public class CoordinateRecorder extends Thread{
         // TODO code application logic here
         
     }
+
+    /*void setAnchor(double parseDouble, double parseDouble0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
     
 }
