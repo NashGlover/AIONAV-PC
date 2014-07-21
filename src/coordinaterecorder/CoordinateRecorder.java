@@ -40,8 +40,8 @@ public class CoordinateRecorder extends Thread {
     }
     
     public void setAnchor (Double _x, Double _y) {
-        anchorX = _x;
-        anchorY = _y;
+        firstX = _x;
+        firstY = _y;
         first = true;
     }
     
