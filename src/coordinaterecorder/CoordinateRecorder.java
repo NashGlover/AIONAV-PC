@@ -11,6 +11,12 @@ import java.nio.ByteBuffer;
 import java.util.*;
 import javax.swing.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+
 /**
  *sock
  * @author Administrator
@@ -83,6 +89,7 @@ public class CoordinateRecorder extends Thread {
     }
     
     void startRecording() {
+        System.out.println("started recording");
         double latitude, longitude, altitude;
         //double x = 0, y = 0, z = 0;
         running = true;
@@ -115,21 +122,22 @@ public class CoordinateRecorder extends Thread {
                         packet_type = buffer.getInt(4);
                         if (bytesRead == 32){
                                 //length = ByteBuffer.wrap(messageByte).getInt();
-                //		System.out.println("Heartbeat");
+                		System.out.println("Heartbeat");
+                                
                                 length = buffer.getInt();
                                 packet_type = buffer.getInt(4);
                                 device_id = buffer.getLong(8);
                                 device_id2 = buffer.getLong(16);
                                 timestamp = buffer.getLong(24);
+                                
+                                Date currentDate = new Date(timestamp);
+                                DateFormat df = new SimpleDateFormat("dd:MM:yy:HH:mm:ss");
+                                System.out.println("Current Date: " + df.format(currentDate));
                         //	System.out.printf("Length: %d, Packet Type: %d, Device ID: %d %d, Timestamp: %d%n", length, packet_type, device_id, device_id2, timestamp);
                         }
                         if (bytesRead == 56) {
                                 System.out.println("Position Update");
-                                //length = buffer.getInt();
-                                //packet_type = buffer.getInt(4);
-
-                                //device_id = buffer.getLong(8);
-                                //device_id2 = buffer.getLong(16);
+                                
                                 if (packet_type == 5){
                                         System.out.printf("Longitude Latitude update%n");
                                         timestamp = buffer.getLong(24);
@@ -145,6 +153,11 @@ public class CoordinateRecorder extends Thread {
                                 {
                                         System.out.printf("x,y,z Update%n");
                                         timestamp = buffer.getLong(24);
+                                        
+                                        Date currentDate = new Date(timestamp);
+                                        DateFormat df = new SimpleDateFormat("dd:MM:yy:HH:mm:ss");
+                                        System.out.println("Current Date: " + df.format(currentDate));
+                                        
                                         x = Math.round(buffer.getDouble(32)*1000.00)/1000.00;
                                         y = Math.round(buffer.getDouble(40)*1000.00)/1000.00;
                                         z = Math.round(buffer.getDouble(48)*1000.00)/1000.00;

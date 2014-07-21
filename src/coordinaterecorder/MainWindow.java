@@ -20,6 +20,11 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+        headingLabel.setVisible(false);
+        headingXPos.setVisible(false);
+        headingXNeg.setVisible(false);
+        headingYPos.setVisible(false);
+        headingYNeg.setVisible(false);
     }
 
     /**
@@ -41,11 +46,17 @@ public class MainWindow extends javax.swing.JFrame {
         anchorX = new javax.swing.JTextField();
         anchorY = new javax.swing.JTextField();
         addAnchorButton = new javax.swing.JButton();
+        headingLabel = new javax.swing.JLabel();
+        headingXPos = new javax.swing.JButton();
+        headingXNeg = new javax.swing.JButton();
+        headingYPos = new javax.swing.JButton();
+        headingYNeg = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         distanceLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         startButton = new javax.swing.JButton();
+        headingButton = new javax.swing.JButton();
         markButton = new javax.swing.JButton();
         endButton = new javax.swing.JButton();
         toFileButton = new javax.swing.JButton();
@@ -65,9 +76,8 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap())
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,19 +112,40 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        headingLabel.setText("Heading");
+
+        headingXPos.setText("X+");
+
+        headingXNeg.setText("X-");
+
+        headingYPos.setText("Y+");
+
+        headingYNeg.setText("Y-");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 91, Short.MAX_VALUE))
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addAnchorButton)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 139, Short.MAX_VALUE))
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addAnchorButton))
+                    .addComponent(headingLabel)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(headingXPos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(headingXNeg)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(headingYPos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(headingYNeg)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -125,6 +156,14 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addAnchorButton))
+                .addGap(18, 18, 18)
+                .addComponent(headingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(headingXPos)
+                    .addComponent(headingXNeg)
+                    .addComponent(headingYPos)
+                    .addComponent(headingYNeg))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -135,8 +174,8 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -168,7 +207,17 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jPanel1.add(startButton);
 
+        headingButton.setText("Heading");
+        headingButton.setEnabled(false);
+        headingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                headingButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(headingButton);
+
         markButton.setText("Mark");
+        markButton.setEnabled(false);
         markButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 markButtonActionPerformed(evt);
@@ -200,11 +249,14 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-        System.out.println("Start button clicked.");
+        System.out.println("Start button clicked!");
         recorder = new CoordinateRecorder(textArea, distanceLabel);
         recorder.start();
+        markButton.setEnabled(true);
+        headingButton.setEnabled(true);
         endButton.setEnabled(true);
         startButton.setEnabled(false);
+        System.out.println("test");
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void toFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toFileButtonActionPerformed
@@ -244,13 +296,21 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_addAnchorButtonActionPerformed
 
+    private void anchorXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anchorXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_anchorXActionPerformed
+
     private void anchorYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anchorYActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_anchorYActionPerformed
 
-    private void anchorXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anchorXActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_anchorXActionPerformed
+    private void headingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_headingButtonActionPerformed
+        headingLabel.setVisible(true);
+        headingXPos.setVisible(true);
+        headingXNeg.setVisible(true);
+        headingYPos.setVisible(true);
+        headingYNeg.setVisible(true);
+    }//GEN-LAST:event_headingButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,6 +343,7 @@ public class MainWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainWindow().setVisible(true);
+                
             }
         });
     }
@@ -293,6 +354,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField anchorY;
     private javax.swing.JLabel distanceLabel;
     private javax.swing.JButton endButton;
+    private javax.swing.JButton headingButton;
+    private javax.swing.JLabel headingLabel;
+    private javax.swing.JButton headingXNeg;
+    private javax.swing.JButton headingXPos;
+    private javax.swing.JButton headingYNeg;
+    private javax.swing.JButton headingYPos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
