@@ -13,7 +13,6 @@ import javax.swing.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -23,6 +22,7 @@ import java.util.Date;
  */
 public class CoordinateRecorder extends Thread {
     
+    ArrayList<Coordinate> aionavCoordinates = new ArrayList<Coordinate>(300);
     Boolean marked = false;
     Boolean correcting = false;
     Boolean mark = false;
@@ -129,7 +129,7 @@ public class CoordinateRecorder extends Thread {
                                 device_id = buffer.getLong(8);
                                 device_id2 = buffer.getLong(16);
                                 timestamp = buffer.getLong(24);
-                                
+                                System.out.println(timestamp);
                                 Date currentDate = new Date(timestamp);
                                 DateFormat df = new SimpleDateFormat("dd:MM:yy:HH:mm:ss");
                                 System.out.println("Current Date: " + df.format(currentDate));
@@ -151,16 +151,22 @@ public class CoordinateRecorder extends Thread {
                                 }
                                 if (packet_type == 1)
                                 {
+                                        double timePos;
                                         System.out.printf("x,y,z Update%n");
-                                        timestamp = buffer.getLong(24);
+                                        timePos = buffer.getDouble(24);
+                                        System.out.println("Timestamp as double: " + timestamp);
                                         
                                         Date currentDate = new Date(timestamp);
                                         DateFormat df = new SimpleDateFormat("dd:MM:yy:HH:mm:ss");
-                                        System.out.println("Current Date: " + df.format(currentDate));
+                                        String dateString = df.format(currentDate);
                                         
                                         x = Math.round(buffer.getDouble(32)*1000.00)/1000.00;
                                         y = Math.round(buffer.getDouble(40)*1000.00)/1000.00;
                                         z = Math.round(buffer.getDouble(48)*1000.00)/1000.00;
+                                        
+                                        Coordinate coordinate = new Coordinate(x, y, z, timestamp);
+                                        
+                                        aionavCoordinates.add(coordinate);
                                         
                                         if (first)
                                         {
@@ -172,7 +178,7 @@ public class CoordinateRecorder extends Thread {
                                         x = x - differenceX;
                                         y = y - differenceY;
                                         
-                                        currLine = String.format("Time: %d x: %.3f y: %.3f z: %.3f%n", timestamp, x, y, z);
+                                        currLine = String.format("Time: " + dateString + "x: %.3f y: %.3f z: %.3f%n", x, y, z);
                                         System.out.println(currLine);
                                         workingText.append(currLine);
                                         System.out.printf("FirstX: %f%n", firstX);

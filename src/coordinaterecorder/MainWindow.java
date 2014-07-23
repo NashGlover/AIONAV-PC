@@ -288,6 +288,7 @@ public class MainWindow extends javax.swing.JFrame {
         //String mark = String.format("MARK%n");
         //textArea.append(mark);
         recorder.mark = true;
+        System.out.println("test");
         recorder.getSegInfo();
     }//GEN-LAST:event_markButtonActionPerformed
 
