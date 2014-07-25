@@ -1,5 +1,6 @@
 package coordinaterecorder;
 import java.io.*;
+import javax.swing.JComponent;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,6 +26,7 @@ public class MainWindow extends javax.swing.JFrame {
         headingXNeg.setVisible(false);
         headingYPos.setVisible(false);
         headingYNeg.setVisible(false);
+        hereButton1.setEnabled(false);
     }
 
     /**
@@ -40,17 +42,21 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        anchorX = new javax.swing.JTextField();
-        anchorY = new javax.swing.JTextField();
-        addAnchorButton = new javax.swing.JButton();
+        AnchorBar = new javax.swing.JPanel();
+        anchorPointLabel = new javax.swing.JLabel();
+        addPointButton = new javax.swing.JButton();
         headingLabel = new javax.swing.JLabel();
         headingXPos = new javax.swing.JButton();
         headingXNeg = new javax.swing.JButton();
         headingYPos = new javax.swing.JButton();
         headingYNeg = new javax.swing.JButton();
+        anchorPanel = new javax.swing.JPanel();
+        anchorPanel1 = new javax.swing.JPanel();
+        anchorX1 = new javax.swing.JTextField();
+        anchorY1 = new javax.swing.JTextField();
+        anchorZ1 = new javax.swing.JTextField();
+        setButton1 = new javax.swing.JButton();
+        hereButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         distanceLabel = new javax.swing.JLabel();
@@ -69,48 +75,18 @@ public class MainWindow extends javax.swing.JFrame {
         textArea.setRows(5);
         jScrollPane1.setViewportView(textArea);
 
-        jLabel2.setText("Anchor Points");
+        AnchorBar.setLayout(new javax.swing.BoxLayout(AnchorBar, javax.swing.BoxLayout.LINE_AXIS));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 20, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap())
-        );
+        anchorPointLabel.setText("Anchor Points");
+        AnchorBar.add(anchorPointLabel);
 
-        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
-
-        anchorX.setText("x");
-        anchorX.addActionListener(new java.awt.event.ActionListener() {
+        addPointButton.setText("Add Point");
+        addPointButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                anchorXActionPerformed(evt);
+                addPointButtonActionPerformed(evt);
             }
         });
-        jPanel6.add(anchorX);
-
-        anchorY.setText("y");
-        anchorY.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                anchorYActionPerformed(evt);
-            }
-        });
-        jPanel6.add(anchorY);
-
-        addAnchorButton.setText("Anchor A");
-        addAnchorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addAnchorButtonActionPerformed(evt);
-            }
-        });
+        AnchorBar.add(addPointButton);
 
         headingLabel.setText("Heading");
 
@@ -122,40 +98,90 @@ public class MainWindow extends javax.swing.JFrame {
 
         headingYNeg.setText("Y-");
 
+        anchorPanel1.setLayout(new javax.swing.BoxLayout(anchorPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        anchorX1.setText("x");
+        anchorX1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anchorX1ActionPerformed(evt);
+            }
+        });
+        anchorPanel1.add(anchorX1);
+
+        anchorY1.setText("y");
+        anchorY1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anchorY1ActionPerformed(evt);
+            }
+        });
+        anchorPanel1.add(anchorY1);
+
+        anchorZ1.setText("z");
+        anchorPanel1.add(anchorZ1);
+
+        setButton1.setText("Set A");
+        setButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setButton1ActionPerformed(evt);
+            }
+        });
+        anchorPanel1.add(setButton1);
+
+        hereButton1.setLabel("Here");
+        hereButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hereButton1ActionPerformed(evt);
+            }
+        });
+        anchorPanel1.add(hereButton1);
+
+        javax.swing.GroupLayout anchorPanelLayout = new javax.swing.GroupLayout(anchorPanel);
+        anchorPanel.setLayout(anchorPanelLayout);
+        anchorPanelLayout.setHorizontalGroup(
+            anchorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(anchorPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(anchorPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        anchorPanelLayout.setVerticalGroup(
+            anchorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(anchorPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(anchorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AnchorBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(headingLabel)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 139, Short.MAX_VALUE))
-                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addAnchorButton))
-                    .addComponent(headingLabel)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(headingXPos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(headingXNeg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(headingYPos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(headingYNeg)))
+                                .addComponent(headingXPos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(headingXNeg)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(headingYPos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(headingYNeg)))
+                        .addGap(0, 110, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(anchorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AnchorBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addAnchorButton))
+                .addComponent(anchorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(headingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -292,19 +318,6 @@ public class MainWindow extends javax.swing.JFrame {
         recorder.getSegInfo();
     }//GEN-LAST:event_markButtonActionPerformed
 
-    private void addAnchorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAnchorButtonActionPerformed
-        recorder.setAnchor(Double.parseDouble(anchorX.getText()), Double.parseDouble(anchorY.getText()));
-        
-    }//GEN-LAST:event_addAnchorButtonActionPerformed
-
-    private void anchorXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anchorXActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_anchorXActionPerformed
-
-    private void anchorYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anchorYActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_anchorYActionPerformed
-
     private void headingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_headingButtonActionPerformed
         headingLabel.setVisible(true);
         headingXPos.setVisible(true);
@@ -312,6 +325,36 @@ public class MainWindow extends javax.swing.JFrame {
         headingYPos.setVisible(true);
         headingYNeg.setVisible(true);
     }//GEN-LAST:event_headingButtonActionPerformed
+
+    private void hereButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hereButton1ActionPerformed
+        Double x = Double.parseDouble(anchorX1.getText());
+        Double y = Double.parseDouble(anchorY1.getText());
+        Double z = Double.parseDouble(anchorZ1.getText());
+        textArea.append(String.format("x: %.3f y: %.3f z: %.3f%n", x, y, z));
+        recorder.setAnchor(Double.parseDouble(anchorX1.getText()), Double.parseDouble(anchorY1.getText()));
+
+    }//GEN-LAST:event_hereButton1ActionPerformed
+
+    private void setButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setButton1ActionPerformed
+        anchorX1.setEnabled(false);
+        anchorY1.setEnabled(false);
+        hereButton1.setEnabled(true);
+    }//GEN-LAST:event_setButton1ActionPerformed
+
+    private void anchorY1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anchorY1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_anchorY1ActionPerformed
+
+    private void anchorX1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anchorX1ActionPerformed
+        // TODO add your handling codet here:
+    }//GEN-LAST:event_anchorX1ActionPerformed
+
+    private void addPointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPointButtonActionPerformed
+        System.out.println("In action performed");
+        anchorPanel.add(new anchorPanel());
+        ((JComponent)getContentPane()).revalidate();
+        repaint();
+    }//GEN-LAST:event_addPointButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,9 +393,14 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addAnchorButton;
-    private javax.swing.JTextField anchorX;
-    private javax.swing.JTextField anchorY;
+    private javax.swing.JPanel AnchorBar;
+    private javax.swing.JButton addPointButton;
+    private javax.swing.JPanel anchorPanel;
+    private javax.swing.JPanel anchorPanel1;
+    private javax.swing.JLabel anchorPointLabel;
+    private javax.swing.JTextField anchorX1;
+    private javax.swing.JTextField anchorY1;
+    private javax.swing.JTextField anchorZ1;
     private javax.swing.JLabel distanceLabel;
     private javax.swing.JButton endButton;
     private javax.swing.JButton headingButton;
@@ -361,16 +409,15 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton headingXPos;
     private javax.swing.JButton headingYNeg;
     private javax.swing.JButton headingYPos;
+    private javax.swing.JButton hereButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton markButton;
+    private javax.swing.JButton setButton1;
     private javax.swing.JButton startButton;
     private javax.swing.JTextArea textArea;
     private javax.swing.JButton toFileButton;

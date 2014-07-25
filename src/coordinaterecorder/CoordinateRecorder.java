@@ -157,12 +157,16 @@ public class CoordinateRecorder extends Thread {
                                         System.out.println("Timestamp as double: " + timestamp);
                                         
                                         Date currentDate = new Date(timestamp);
-                                        DateFormat df = new SimpleDateFormat("dd:MM:yy:HH:mm:ss");
+                                        DateFormat df = new SimpleDateFormat("MM-dd-yy HH:mm:ss ");
                                         String dateString = df.format(currentDate);
                                         
-                                        x = Math.round(buffer.getDouble(32)*1000.00)/1000.00;
+                                        /*x = Math.round(buffer.getDouble(32)*1000.00)/1000.00;
                                         y = Math.round(buffer.getDouble(40)*1000.00)/1000.00;
-                                        z = Math.round(buffer.getDouble(48)*1000.00)/1000.00;
+                                        z = Math.round(buffer.getDouble(48)*1000.00)/1000.00;*/
+                                        
+                                        x = buffer.getDouble(32);
+                                        y = buffer.getDouble(40);
+                                        z = buffer.getDouble(48);
                                         
                                         Coordinate coordinate = new Coordinate(x, y, z, timestamp);
                                         
@@ -178,7 +182,7 @@ public class CoordinateRecorder extends Thread {
                                         x = x - differenceX;
                                         y = y - differenceY;
                                         
-                                        currLine = String.format("Time: " + dateString + "x: %.3f y: %.3f z: %.3f%n", x, y, z);
+                                        currLine = String.format("Time: " + dateString + "x: %.3f y: %.3f z: %.3f%n%n", x, y, z);
                                         System.out.println(currLine);
                                         workingText.append(currLine);
                                         System.out.printf("FirstX: %f%n", firstX);
